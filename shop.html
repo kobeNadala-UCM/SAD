@@ -37,7 +37,7 @@
       overflow: hidden;
     }
 
-    /* Sidebar */
+    /* Sidebar - Fixed width behavior */
     .sidebar {
       width: var(--sidebar-width);
       background: var(--sidebar-bg);
@@ -46,7 +46,7 @@
       flex-direction: column;
       border-right: 1px solid var(--border);
       position: relative;
-      transition: width 0.3s ease;
+      transition: width 0.3s (ease);
     }
 
     .sidebar.collapsed {
@@ -58,12 +58,14 @@
       display: none;
     }
 
-    /* Logo Area */
+    /* Logo Area - Consistent sizing/alignment */
     .logo-area {
       padding: 0 20px 30px;
       display: flex;
       align-items: center;
       gap: 12px;
+      height: 40px; /* Fixed height for vertical alignment */
+      box-sizing: content-box;
     }
 
     .logo-icon {
@@ -102,7 +104,7 @@
         white-space: nowrap;
     }
 
-    /* Toggle Button */
+    /* Toggle Button - No Jumping */
     .toggle-btn {
       position: absolute;
       right: 16px;
@@ -116,13 +118,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s ease, top 0.3s ease; 
+      transition: transform 0.3s ease; 
       padding: 0; 
+      z-index: 10;
     }
     
     .sidebar.collapsed .toggle-btn {
         right: 22px; 
-        top: 16px; 
     }
 
     .toggle-btn svg {
@@ -332,16 +334,23 @@
       text-align: center;
     }
 
-    .product-image {
+    .product-image-container {
       width: 100%;
       height: 200px;
       background: #F3F4F6;
       border-radius: 8px;
       margin-bottom: 16px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 48px;
+      padding: 10px; /* Added padding to give the product some breathing room */
+    }
+
+    .product-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Changed from 'cover' to 'contain' to fit the whole calculator */
     }
 
     .product-name {
@@ -374,7 +383,7 @@
       margin-bottom: 12px;
     }
 
-    .add-cart-btn {
+    .add-cart-btn, .edit-btn {
       width: 100%;
       padding: 10px;
       background: white;
@@ -388,6 +397,14 @@
 
     .add-cart-btn:hover {
       background: var(--lime);
+    }
+    
+    .edit-btn {
+      margin-bottom: 8px;
+    }
+    
+    .edit-btn:hover {
+      background: #f0f0f0;
     }
 
     @media (max-width: 1024px) {
@@ -505,69 +522,87 @@
         <h1 class="page-title">Featured Products</h1>
 
         <div class="product-grid">
-          <div class="product-card">
-            <div class="product-image">📓</div>
-            <div class="product-name">Spiral Notebook</div>
+          <div class="product-card" id="card1">
+            <div class="product-image-container">
+                <img src="/images/spiral_notebook.png" class="png" alt="Spiral Notebook">
+            </div>
+            <div class="product-name p-name">Spiral Notebook</div>
             <div class="product-rating">
               <span class="stars">★★★★★</span>
               <span class="review-count">245 Reviews</span>
             </div>
-            <div class="product-price">₱89</div>
+            <div class="product-price p-price">₱89</div>
+            <button class="edit-btn" onclick="triggerEdit('card1')">Edit Product</button>
             <button class="add-cart-btn">Add to Cart</button>
           </div>
 
-          <div class="product-card">
-            <div class="product-image">🔢</div>
-            <div class="product-name">Scientific Calculator</div>
+          <div class="product-card" id="card2">
+            <div class="product-image-container">
+                <img src="/images/scientific_calculator.png" class="png" alt="Scientific Calculator">
+            </div>
+            <div class="product-name p-name">Scientific Calculator</div>
             <div class="product-rating">
               <span class="stars">★★★★★</span>
               <span class="review-count">312 Reviews</span>
             </div>
-            <div class="product-price">₱1,299</div>
+            <div class="product-price p-price">₱1,299</div>
+            <button class="edit-btn" onclick="triggerEdit('card2')">Edit Product</button>
             <button class="add-cart-btn">Add to Cart</button>
           </div>
 
-          <div class="product-card">
-            <div class="product-image">🖊️</div>
-            <div class="product-name">Permanent Marker</div>
+          <div class="product-card" id="card3">
+            <div class="product-image-container">
+                <img src="/images/permanent_marker.png" class="png" alt="Permanent Marker">
+            </div>
+            <div class="product-name p-name">Permanent Marker</div>
             <div class="product-rating">
               <span class="stars">★★★★★</span>
               <span class="review-count">157 Reviews</span>
             </div>
-            <div class="product-price">₱45</div>
+            <div class="product-price p-price">₱45</div>
+            <button class="edit-btn" onclick="triggerEdit('card3')">Edit Product</button>
             <button class="add-cart-btn">Add to Cart</button>
           </div>
 
-          <div class="product-card">
-            <div class="product-image">📌</div>
-            <div class="product-name">Elmer's Glue All</div>
+          <div class="product-card" id="card4">
+            <div class="product-image-container">
+                <img src="/images/elmers_glue.png" class="png" alt="Elmer's Glue All">
+            </div>
+            <div class="product-name p-name">Elmer's Glue All</div>
             <div class="product-rating">
               <span class="stars">★★★★★</span>
               <span class="review-count">198 Reviews</span>
             </div>
-            <div class="product-price">₱125</div>
+            <div class="product-price p-price">₱125</div>
+            <button class="edit-btn" onclick="triggerEdit('card4')">Edit Product</button>
             <button class="add-cart-btn">Add to Cart</button>
           </div>
 
-          <div class="product-card">
-            <div class="product-image">🖍️</div>
-            <div class="product-name">Glue Stick Purple</div>
+          <div class="product-card" id="card5">
+            <div class="product-image-container">
+                <img src="/images/glue_stick_purple.jpg" class="jpg" alt="Glue Stick Purple">
+            </div>
+            <div class="product-name p-name">Glue Stick Purple</div>
             <div class="product-rating">
               <span class="stars">★★★★☆</span>
               <span class="review-count">89 Reviews</span>
             </div>
-            <div class="product-price">₱85</div>
+            <div class="product-price p-price">₱85</div>
+            <button class="edit-btn" onclick="triggerEdit('card5')">Edit Product</button>
             <button class="add-cart-btn">Add to Cart</button>
           </div>
 
-          <div class="product-card">
-            <div class="product-image">✂️</div>
-            <div class="product-name">Pencil Sharpener</div>
+          <div class="product-card" id="card6">
+            <div class="product-image-container">
+                <img src="/images/pencil_sharpener.jpg" class="jpg" alt="Pencil Sharpener">
+            </div>
+            <div class="product-name p-name">Pencil Sharpener</div>
             <div class="product-rating">
               <span class="stars">★★★★★</span>
               <span class="review-count">276 Reviews</span>
             </div>
-            <div class="product-price">₱55</div>
+            <div class="product-price p-price">₱55</div>
+            <button class="edit-btn" onclick="triggerEdit('card6')">Edit Product</button>
             <button class="add-cart-btn">Add to Cart</button>
           </div>
         </div>
@@ -578,6 +613,22 @@
   <script>
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('collapsed');
+    }
+
+    function triggerEdit(id) {
+      const card = document.getElementById(id);
+      const nameEl = card.querySelector('.p-name');
+      const priceEl = card.querySelector('.p-price');
+      const imgEl = card.querySelector('.p-img');
+
+      const newName = prompt("Enter new product name:", nameEl.innerText);
+      if (newName !== null) nameEl.innerText = newName;
+
+      const newPrice = prompt("Enter new price:", priceEl.innerText);
+      if (newPrice !== null) priceEl.innerText = newPrice;
+
+      const newImg = prompt("Enter new image path/URL:", imgEl.src);
+      if (newImg !== null) imgEl.src = newImg;
     }
   </script>
 </body>
