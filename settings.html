@@ -53,10 +53,12 @@
       width: var(--sidebar-collapsed);
     }
 
-    .sidebar.collapsed .label {
+    .sidebar.collapsed .label,
+    .sidebar.collapsed .logo-text.full-name-logo { 
       display: none;
     }
 
+    /* Logo Area */
     .logo-area {
       padding: 0 20px 30px;
       display: flex;
@@ -64,17 +66,43 @@
       gap: 12px;
     }
 
-    .logo {
-      width: 48px;
-      height: 48px;
-      background: white;
-      border-radius: 8px;
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background-color: var(--active);
+      color: white;
+      border-radius: 20%;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: 900;
       font-size: 24px;
+      flex-shrink: 0;
     }
 
+    .logo-text.full-name-logo {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+    }
+    
+    .logo-text.full-name-logo .main-name {
+        font-size: 20px; 
+        font-weight: 900;
+        letter-spacing: 1px;
+        color: var(--text-dark);
+    }
+
+    .logo-text.full-name-logo .sub-name {
+        font-size: 10px;
+        font-weight: normal;
+        color: var(--text-muted);
+        letter-spacing: 0.5px;
+        margin-top: 2px;
+        white-space: nowrap;
+    }
+
+    /* Toggle Button */
     .toggle-btn {
       position: absolute;
       right: 16px;
@@ -85,15 +113,27 @@
       width: 24px;
       height: 24px;
       cursor: pointer;
-      font-size: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, top 0.3s ease; 
+      padding: 0; 
+    }
+    
+    .sidebar.collapsed .toggle-btn {
+        right: 22px; 
+        top: 16px; 
     }
 
-    .sidebar.collapsed .toggle-btn {
-      transform: rotate(180deg);
+    .toggle-btn svg {
+        width: 14px; 
+        height: 14px;
+        color: var(--text-dark);
+        transform: rotate(180deg); 
+    }
+
+    .sidebar.collapsed .toggle-btn svg {
+      transform: rotate(0deg); 
     }
 
     .nav {
@@ -124,12 +164,24 @@
 
     .nav-icon {
       width: 20px;
-      font-size: 18px;
+      height: 20px;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
+    .nav-icon svg {
+      stroke-width: 2;
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+    }
+
+    /* ALIGNED BOTTOM SECTION WITH RED INDICATOR */
     .sidebar-bottom {
-      padding: 20px;
+      padding: 20px 0; /* Padding left/right set to 0 to allow border to touch edge */
       border-top: 1px solid var(--border);
     }
 
@@ -139,16 +191,23 @@
       gap: 12px;
       color: var(--text-dark);
       text-decoration: none;
-      padding: 8px 0;
+      padding: 12px 20px; /* Matched nav padding for exact icon alignment */
       font-size: 15px;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .sidebar-bottom a:hover {
+      background: rgba(255,255,255,0.3);
     }
 
     .sidebar-bottom a.active {
+      border-left-color: var(--active); /* The red indicator */
       color: var(--active);
       font-weight: 500;
     }
 
-    /* Content */
+    /* Content Area */
     .content {
       flex: 1;
       background: var(--bg);
@@ -208,7 +267,14 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 18px;
+    }
+
+    .icon-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
     }
 
     .user-profile {
@@ -409,75 +475,90 @@
     }
 
     @media (max-width: 768px) {
-      .sidebar {
-        width: var(--sidebar-collapsed);
-      }
-      
-      .sidebar .label {
-        display: none;
-      }
-      
-      .user-info {
-        display: none;
-      }
+      .sidebar { width: var(--sidebar-collapsed); }
+      .sidebar .label, .user-info { display: none; }
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="logo-area">
-        <div class="logo">🎓</div>
-        <button class="toggle-btn" onclick="toggleSidebar()">◀</button>
+        <div class="logo-icon">P</div>
+        <div class="logo-text full-name-logo">
+            <span class="main-name">PEOPLES</span>
+            <span class="sub-name">Educational Supply</span>
+        </div>
       </div>
       
+      <button class="toggle-btn" onclick="toggleSidebar()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
       <nav class="nav">
         <a href="dashboard.html">
-          <span class="nav-icon">▦</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+          </span>
           <span class="label">Dashboard</span>
         </a>
         <a href="product.html">
-          <span class="nav-icon">📦</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </span>
           <span class="label">Product</span>
         </a>
         <a href="customers.html">
-          <span class="nav-icon">👥</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </span>
           <span class="label">Customers</span>
         </a>
         <a href="shop.html">
-          <span class="nav-icon">🛍️</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </span>
           <span class="label">Shop</span>
         </a>
         <a href="cart.html">
-          <span class="nav-icon">🛒</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          </span>
           <span class="label">Cart</span>
         </a>
       </nav>
       
       <div class="sidebar-bottom">
         <a href="settings.html" class="active">
-          <span class="nav-icon">⚙️</span>
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </span>
           <span class="label">Setting</span>
         </a>
-        <a href="index.html">
-          <span class="nav-icon">🚪</span>
+        <a href="index.html" style="color: var(--active)">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </span>
           <span class="label">Log-out</span>
         </a>
       </div>
     </aside>
 
-    <!-- Main Content -->
     <main class="content">
-      <!-- Top Bar -->
       <header class="topbar">
         <div class="search-box">
           <span class="search-icon">🔍</span>
           <input type="text" placeholder="search">
         </div>
         <div class="topbar-right">
-          <button class="icon-btn">✉️</button>
-          <button class="icon-btn">🔔</button>
+          <button class="icon-btn">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </button>
+          <button class="icon-btn">
+            <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
           <div class="user-profile">
             <div class="user-avatar">K</div>
             <div class="user-info">
@@ -489,10 +570,8 @@
         </div>
       </header>
 
-      <!-- Settings Content -->
       <div class="container">
         <div class="settings-grid">
-          <!-- Preferences Card -->
           <div class="card">
             <h2>🔔 Preferences</h2>
             
@@ -511,17 +590,8 @@
               </div>
               <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
             </div>
-
-            <div class="setting-item">
-              <div class="setting-info">
-                <h3>🌓 Light mode/ Dark mode</h3>
-                <p>Set your display to Light Mode or Dark Mode</p>
-              </div>
-              <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
-            </div>
           </div>
 
-          <!-- Contact & Support Card -->
           <div class="card">
             <h2>📋 Contact & Support</h2>
             <p style="color:var(--text-muted);margin-bottom:16px">Need help? You can find us at:</p>
@@ -569,8 +639,7 @@
 
   <script>
     function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('collapsed');
+      document.getElementById('sidebar').classList.toggle('collapsed');
     }
 
     function toggleSwitch(element) {
