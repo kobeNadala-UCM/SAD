@@ -38,7 +38,7 @@
       overflow: hidden;
     }
 
-    /* Sidebar */
+    /* Sidebar - Exact Match to Shop.html */
     .sidebar {
       width: var(--sidebar-width);
       background: var(--sidebar-bg);
@@ -54,54 +54,41 @@
       width: var(--sidebar-collapsed);
     }
 
-    /* Hide text elements when collapsed */
     .sidebar.collapsed .label,
-    .sidebar.collapsed .user-info,
-    .sidebar.collapsed .logo-text.full-name-logo { 
+    .sidebar.collapsed .logo-text.full-name-logo {
       display: none;
     }
 
-    .sidebar-bottom a.logout {
-        color: var(--active); /* Set color to red/active */
-    }
-
-    /* Logo Area */
+    /* Logo Area - Exact Match to Shop.html */
     .logo-area {
       padding: 0 20px 30px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      justify-content: flex-start; 
+      gap: 12px;
     }
 
     .logo-icon {
-      background: var(--active);
+      width: 40px;
+      height: 40px;
+      background-color: var(--active);
       color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
+      border-radius: 20%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      font-weight: bold;
+      font-weight: 900;
+      font-size: 24px;
       flex-shrink: 0;
     }
 
     .logo-text.full-name-logo {
-        font-size: 24px; 
-        font-weight: 900;
-        letter-spacing: 1px;
-        color: var(--text-dark);
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
         line-height: 1.1;
     }
     
     .logo-text.full-name-logo .main-name {
-        font-size: 20px;
+        font-size: 20px; 
         font-weight: 900;
         letter-spacing: 1px;
         color: var(--text-dark);
@@ -116,14 +103,7 @@
         white-space: nowrap;
     }
 
-    /* Keep spacing when collapsed but no icon is shown */
-    .sidebar.collapsed .logo-area {
-        justify-content: center; 
-        padding: 0 0 30px;
-        min-height: 50px;
-        gap: 0;
-    }
-
+    /* Toggle Button - Exact Match to Shop.html */
     .toggle-btn {
       position: absolute;
       right: 16px;
@@ -134,15 +114,27 @@
       width: 24px;
       height: 24px;
       cursor: pointer;
-      font-size: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, top 0.3s ease; 
+      padding: 0; 
+    }
+    
+    .sidebar.collapsed .toggle-btn {
+        right: 22px; 
+        top: 16px; 
     }
 
-    .sidebar.collapsed .toggle-btn {
-      transform: rotate(180deg);
+    .toggle-btn svg {
+        width: 14px; 
+        height: 14px;
+        color: var(--text-dark);
+        transform: rotate(180deg); 
+    }
+
+    .sidebar.collapsed .toggle-btn svg {
+      transform: rotate(0deg); 
     }
 
     .nav {
@@ -173,11 +165,19 @@
 
     .nav-icon {
       width: 20px;
-      font-size: 18px;
+      height: 20px;
       flex-shrink: 0;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+    }
+
+    .nav-icon svg {
+      stroke-width: 2;
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
     }
 
     .sidebar-bottom {
@@ -195,7 +195,7 @@
       font-size: 15px;
     }
 
-    /* Content */
+    /* Content Area */
     .content {
       flex: 1;
       background: var(--bg);
@@ -236,7 +236,6 @@
       top: 50%;
       transform: translateY(-50%);
       font-size: 14px;
-      color: var(--text-muted);
     }
 
     .topbar-right {
@@ -256,8 +255,14 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 18px;
-      color: var(--text-dark);
+    }
+
+    .icon-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
     }
 
     .user-profile {
@@ -281,7 +286,6 @@
       justify-content: center;
       font-weight: bold;
       font-size: 14px;
-      color: white;
     }
 
     .user-info {
@@ -390,31 +394,15 @@
     }
 
     @media (max-width: 1024px) {
-      .stat-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .chart-area {
-        grid-template-columns: 1fr;
-      }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .chart-area { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
-      .sidebar {
-        width: var(--sidebar-collapsed);
-      }
-      
-      .sidebar .label {
-        display: none;
-      }
-      
-      .user-info {
-        display: none;
-      }
-
-      .stat-grid {
-        grid-template-columns: 1fr;
-      }
+      .sidebar { width: var(--sidebar-collapsed); }
+      .sidebar .label { display: none; }
+      .user-info { display: none; }
+      .stat-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -430,52 +418,53 @@
       </div>
       
       <button class="toggle-btn" onclick="toggleSidebar()">
-        <i class="fa-solid fa-chevron-left"></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
       </button>
-      
+
       <nav class="nav">
         <a href="dashboard.html">
           <span class="nav-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
           </span>
           <span class="label">Dashboard</span>
         </a>
         <a href="product.html">
           <span class="nav-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
           </span>
           <span class="label">Product</span>
         </a>
-        <a href="customers.html"  class="active">
+        <a href="customers.html" class="active">
           <span class="nav-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
           </span>
           <span class="label">Customers</span>
         </a>
         <a href="shop.html">
           <span class="nav-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
           </span>
           <span class="label">Shop</span>
         </a>
-        <a href="cart.html">
-          <span class="nav-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <a href="orders.html"> <span class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           </span>
-          <span class="label">Cart</span>
+          <span class="label">Orders</span>
         </a>
       </nav>
 
       <div class="sidebar-bottom">
         <a href="settings.html">
           <span class="nav-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
           </span>
           <span class="label">Setting</span>
         </a>
-        <a href="index.html" class="logout">
+        <a href="index.html" style="color: var(--active)">
           <span class="nav-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
           </span>
           <span class="label">Log-out</span>
         </a>
@@ -485,19 +474,23 @@
     <main class="content">
       <header class="topbar">
         <div class="search-box">
-          <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <span class="search-icon">🔍</span>
           <input type="text" placeholder="search">
         </div>
         <div class="topbar-right">
-          <button class="icon-btn"><i class="fa-regular fa-envelope"></i></button>
-          <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+          <button class="icon-btn">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </button>
+          <button class="icon-btn">
+            <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
           <div class="user-profile">
             <div class="user-avatar">K</div>
             <div class="user-info">
               <div class="user-name">kobe nadala</div>
               <div class="user-email">kobenadala@gmail.com</div>
             </div>
-            <span><i class="fa-solid fa-caret-down" style="font-size: 10px; margin-left: 5px;"></i></span>
+            <span>▼</span>
           </div>
         </div>
       </header>
@@ -578,7 +571,6 @@
               <div class="bar" style="height: 100%"></div>
             </div>
           </div>
-
           <div class="chart-card">
             <h3>Calls per day</h3>
             <div class="bar-chart">
@@ -592,7 +584,6 @@
               <div class="bar" style="height: 95%"></div>
             </div>
           </div>
-
           <div class="chart-card">
             <h3>Revenue per day</h3>
             <div class="bar-chart">
@@ -613,8 +604,7 @@
 
   <script>
     function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('collapsed');
+      document.getElementById('sidebar').classList.toggle('collapsed');
     }
   </script>
 </body>
