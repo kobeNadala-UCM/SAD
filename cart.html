@@ -301,7 +301,7 @@
       color: var(--text-muted);
     }
 
-    /* Orders Section Styling following provided Image */
+    /* Orders Section Styling */
     .container {
       padding: 24px;
       overflow-y: auto;
@@ -339,7 +339,7 @@
     }
 
     .btn-create-order {
-      background: #5D3FD3; /* Matching the purple in the image */
+      background: #5D3FD3; 
       color: white;
       border: none;
       padding: 10px 20px;
@@ -349,11 +349,31 @@
       font-weight: 500;
     }
 
+    /* STAT GRID ADDITION */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .mini-card {
+      background: white;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .mini-card .label { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+    .mini-card .value { font-size: 28px; font-weight: bold; }
+
     .orders-table-card {
       background: white;
       border-radius: 4px;
       box-shadow: var(--shadow);
       padding: 20px;
+      margin-bottom: 24px;
     }
 
     .table-controls {
@@ -420,7 +440,6 @@
       border-bottom: 1px solid #F3F4F6;
     }
 
-    /* Status Badges following Image */
     .status {
       padding: 4px 12px;
       border-radius: 20px;
@@ -438,11 +457,30 @@
         color: #9CA3AF;
     }
 
+    /* RECENT ACTIVITY GRID ADDITION */
+    .activity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .activity-card {
+      background: white;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+    }
+
+    .activity-card h3 { font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .activity-item { font-size: 13px; padding: 8px 0; border-bottom: 1px dashed #eee; display: flex; justify-content: space-between; }
+
     @media (max-width: 768px) {
       .sidebar { width: var(--sidebar-collapsed); }
       .sidebar .label { display: none; }
       .user-info { display: none; }
       .table-controls { flex-direction: column; }
+      .stat-grid, .activity-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -544,6 +582,21 @@
           </div>
         </div>
 
+        <div class="stat-grid">
+          <div class="mini-card">
+            <div class="label">Total Orders</div>
+            <div class="value" id="totalCount">3</div>
+          </div>
+          <div class="mini-card">
+            <div class="label">Pending Orders</div>
+            <div class="value" style="color: var(--active)">1</div>
+          </div>
+          <div class="mini-card">
+            <div class="label">Revenue (Dec)</div>
+            <div class="value">₱590.00</div>
+          </div>
+        </div>
+
         <div class="orders-table-card">
           <div class="table-controls">
             <div class="table-search">
@@ -608,6 +661,22 @@
             </tbody>
           </table>
         </div>
+
+        <div class="activity-grid">
+          <div class="activity-card">
+            <h3>Recent Shipments</h3>
+            <div class="activity-item"><span>#10 Shipped via J&T</span> <span>10m ago</span></div>
+            <div class="activity-item"><span>#8 Out for Delivery</span> <span>2h ago</span></div>
+            <div class="activity-item"><span>#5 Delivered</span> <span>5h ago</span></div>
+          </div>
+          <div class="activity-card">
+            <h3>System Status</h3>
+            <div class="activity-item"><span>Payment Gateway</span> <span style="color: green">Online</span></div>
+            <div class="activity-item"><span>Inventory Sync</span> <span style="color: green">Healthy</span></div>
+            <div class="activity-item"><span>Last Backup</span> <span>04:00 AM</span></div>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
@@ -619,17 +688,14 @@
 
     function newOrder() {
       const table = document.getElementById("ordersTable").getElementsByTagName('tbody')[0];
-      const newRow = table.insertRow(0); // Adds row at the top
+      const newRow = table.insertRow(0); 
       
       const customerName = prompt("Enter Customer Name:") || "New Customer";
       const amount = prompt("Enter Grand Total (e.g., ₱100.00):") || "₱0.00";
       
-      // Get current date/time
       const now = new Date();
       const dateString = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0];
-      
-      // Use logic to determine next ID
-      const nextId = table.rows.length + 8; 
+      const nextId = table.rows.length + 7; 
 
       newRow.innerHTML = `
         <td>${nextId}</td>
@@ -642,6 +708,9 @@
         <td>${customerName}</td>
         <td class="action-icon">👁️</td>
       `;
+
+      // Update total count display
+      document.getElementById('totalCount').innerText = table.rows.length;
     }
   </script>
 </body>
