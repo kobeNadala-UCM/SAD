@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Home - PEOPLES Educational Supply</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jeju+Myeongjo&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #B2BEB5;
+      --card-bg: #FFFFFF;
+      --sidebar-bg: #D9DDD8;
+      --active: #C52314;
+      --text-dark: #2C2C2C;
+      --text-muted: #6B7280;
+      --border: #C5CDC5;
+      --lime: #BAC51F;
+      --purple: #8B5CF6;
+      
+      --radius: 12px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Jeju Myeongjo', Georgia, serif;
+      background: var(--lime);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      background: var(--lime);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo-icon {
+      font-size: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--active);
+    }
+
+    .cart-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    /* Banner Section */
+    .banner {
+      background: var(--lime);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .banner-content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .new-badge {
+      background: var(--purple);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 14px;
+      margin-bottom: 16px;
+      transform: rotate(-5deg);
+    }
+
+    .banner h1 {
+      font-size: 48px;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .save-btn {
+      background: white;
+      border: 2px solid var(--text-dark);
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: inherit;
+      font-weight: bold;
+    }
+
+    /* Hero Image Section */
+    .hero-section {
+      background: var(--lime);
+      padding: 48px;
+      position: relative;
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .diagonal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
+      background: var(--lime);
+      clip-path: polygon(0 0, 100% 0, 60% 100%, 0% 100%);
+      z-index: 1;
+    }
+
+    .hero-text {
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      text-align: right;
+    }
+
+    .hero-text h2 {
+      font-size: 64px;
+      line-height: 1.2;
+      color: var(--text-dark);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        gap: 16px;
+        font-size: 14px;
+      }
+
+      .banner {
+        flex-direction: column;
+        padding: 24px;
+      }
+
+      .banner h1 {
+        font-size: 32px;
+      }
+
+      .hero-section {
+        padding: 24px;
+      }
+
+      .hero-image {
+        height: 300px;
+      }
+
+      .hero-text h2 {
+        font-size: 36px;
+      }
+
+      .diagonal-overlay {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="logo-section">
+      <span class="logo-icon">🎓</span>
+      <span>Peoples Educational Supply</span>
+    </div>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="product.html">Product</a>
+      <a href="customers.html">Customers</a>
+      <a href="shop.html">Shop</a>
+      <a href="settings.html">Setting</a>
+      <a href="cart.html">art</a>
+    </div>
+  </nav>
+
+  <!-- Banner Section -->
+  <section class="banner">
+    <div class="banner-content">
+      <div class="new-badge">NEW LOWER PRICES</div>
+      <h1>We've dropped prices on over 1000 products</h1>
+      <button class="save-btn">Save now</button>
+    </div>
+  </section>
+
+  <!-- Hero Image Section -->
+  <section class="hero-section">
+    <div class="hero-card">
+      <div class="hero-image">
+        <!-- You'll replace this with your actual image -->
+        <div style="width:100%;height:100%;background:linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);display:flex;align-items:center;justify-content:center;color:#999;">
+          [School Supplies Image - Replace with your image from Figma]
+        </div>
+        <div class="diagonal-overlay"></div>
+        <div class="hero-text">
+          <h2>QUALITY PRODUCTS.<br>GREAT VALUE.</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
